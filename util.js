@@ -71,35 +71,35 @@ distance = Math.sqrt(sideA + sideB);
 
 function controller(){
 if(event.keyCode == 68){
-	p1SuperCircle.direction = 3;
+	p1SuperCircle.direction = RIGHT;
 	p1SuperCircle.move();
 }
 if(event.keyCode == 65){
-	p1SuperCircle.direction = 1;
+	p1SuperCircle.direction = LEFT;
 	p1SuperCircle.move();
 }
 if(event.keyCode == 87){
-	p1SuperCircle.direction = 2;
+	p1SuperCircle.direction = UP;
 	p1SuperCircle.move();
 }
 if(event.keyCode == 83){
-	p1SuperCircle.direction = 4;
+	p1SuperCircle.direction = DOWN;
 	p1SuperCircle.move();
 }
 if(event.keyCode == 39){
-	p2SuperCircle.direction = 3;
+	p2SuperCircle.direction = RIGHT;
 	p2SuperCircle.move();
 }
 if(event.keyCode == 37){
-	p2SuperCircle.direction = 1;
+	p2SuperCircle.direction = LEFT;
 	p2SuperCircle.move();
 }
 if(event.keyCode == 38){
-	p2SuperCircle.direction = 2;
+	p2SuperCircle.direction = UP;
 	p2SuperCircle.move();
 }
 if(event.keyCode == 40){
-	p2SuperCircle.direction = 4;
+	p2SuperCircle.direction = DOWN;
 	p2SuperCircle.move();
 }
 }

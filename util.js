@@ -7,66 +7,42 @@ function generateObject(x, y, r, colour){
 	ctx.stroke();
 }
 
-function checkCollisions(player){
-
-if(player.circle.x > canvasWidth-player.circle.r){
-	player.circle.x = canvasWidth - player.circle.r;
-
-}
-if(player.circle.x < player.circle.r){
-	player.circle.x = player.circle.r;
-
-}
-if(player.circle.y > canvasHeight-player.circle.r){
-	player.circle.y = canvasHeight - player.circle.r;
-
-}
-if(player.circle.y < player.circle.r){
-	player.circle.y = player.circle.r;
-
-}
-if (circleCollision(player, p2) && player.type == "player1"){
-	console.log("Player Collision");		
-	//p1.randomisePos();
-	//p2.randomisePos();
-	}
-
-if (circleCollision(player, heart)){
-	console.log("Heart Collision");
-	//player.health+=1;
-	//heart.randomisePos();
-	}
-
-	if (circleCollision(player, bomb)){
-	console.log("Bomb Collision");
-	//player.health-=1;
-	//bomb.randomisePos()
-	}
-
-	if (circleCollision(player, speedBoost)){
-	console.log("Speed Boost Collision");
-	//player.speed *= speedMultiplier
-	//setTimeout(speedReset, 5000);
-	//speedBoost.randomisePos()
-	}	
-}
-
 function circleCollision(c1, c2){
 
 //console.log(c1.circle.x);
 var ret = false;
-sideA = Math.abs(c1.circle.x - c2.circle.x);
-sideB = Math.abs(c1.circle.y - c2.circle.y);
+sideA = Math.abs(c1.x - c2.x);
+sideB = Math.abs(c1.y - c2.y);
 
 sideA = sideA*sideA;
 sideB = sideB*sideB;
 
 distance = Math.sqrt(sideA + sideB);
 
-	if(distance < c1.circle.r + c2.circle.r){
+	if(distance < c1.r + c2.r){
 	ret = true;
 	}
 	return ret;
+}
+
+function checkBoundary(myCircle){
+	
+if(myCircle.circle.x > canvasWidth-myCircle.circle.r){
+	myCircle.circle.x = canvasWidth - myCircle.circle.r;
+}
+
+if(myCircle.circle.x < myCircle.circle.r){
+	myCircle.circle.x = myCircle.circle.r;
+}
+
+if(myCircle.circle.y > canvasHeight-myCircle.circle.r){
+	myCircle.circle.y = canvasHeight - myCircle.circle.r;	
+}
+
+if(myCircle.circle.y < myCircle.circle.r){
+	myCircle.circle.y = myCircle.circle.r;
+}	
+	
 }
 
 function controller(){

@@ -46,7 +46,6 @@ var bomb = new NonPlayer(bombCircle, 1, "bomb", 10, 0);
 var speedBoostCircle = new Circle(380, 380 , 10, "00ff00");
 var speedBoost = new NonPlayer(speedBoostCircle, 1, "speedBoost", 10, 10);
 
-
 var npArray = [];
 
 onload=setup();
@@ -65,8 +64,10 @@ function setup(){
 
 function gameLogic(){
 	refreshCanvas();
-checkCollisions(p1);
-checkCollisions(p2);
+	checkBoundary(p1);
+	checkBoundary(p2);
+	p1.checkCollision();
+	p2.checkCollision();
 
 }
 

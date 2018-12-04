@@ -15,6 +15,6 @@ this.randomisePos = function(){
 };
 this.randomiseDirection = function(){
 
-	this.direction = Math.floor(Math.random() * 6) + 1;
+	this.direction = Math.floor(Math.random() * 4) + 1;
 };
 }

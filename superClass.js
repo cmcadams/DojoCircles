@@ -12,6 +12,35 @@ this.draw = function(){
 	circle.draw();
 };
 
+this.checkCollision = function(){
+	
+	if (circleCollision (this.circle, p2.circle) && this.type == "player1"){
+	console.log("Player Collision");		
+	//p1.randomisePos();
+	//p2.randomisePos();
+	}
+
+if (circleCollision(this.circle, heart.circle)){
+	console.log("Heart Collision");
+	//player.health+=1;
+	//heart.randomisePos();
+	}
+
+	if (circleCollision(this.circle, bomb.circle)){
+	console.log("Bomb Collision");
+	//player.health-=1;
+	//bomb.randomisePos()
+	}
+
+	if (circleCollision(this.circle, speedBoost.circle)){
+	console.log("Speed Boost Collision");
+	//player.speed *= speedMultiplier
+	//setTimeout(speedReset, 5000);
+	//speedBoost.randomisePos()
+	}
+};
+
+
 this.move = function(){
 switch (this.direction) {
     case 1:

@@ -21,16 +21,16 @@ this.randomiseDirection = function(){
 
 this.move = function(){
 switch (this.direction) {
-    case 1:
+    case LEFT:
         this.moveLeft();
         break;
-    case 2:
+    case UP:
         this.moveUp();
         break;
-    case 3:
+    case RIGHT:
         this.moveRight();
         break;
-	case 4:
+	case DOWN:
         this.moveDown();
         break;
 }

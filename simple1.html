@@ -2,8 +2,9 @@
 <html>
 <body>
 <script src="circle.js"></script>
-<script src="superClass.js"></script>
 <script src="util.js"></script>
+<script src="superClass.js"></script>
+<script src="const.js"></script>
 <style>
 canvas{
 border:1px solid #000000;
@@ -27,27 +28,23 @@ var canvasWidth = 400;
 var i = 0;
 
 // x, y, r
-var p1Circle = new Circle(20, 20 , 50);
-// circle, color, speed , direction
-var p1SuperCircle = new SuperCircle(p1Circle, "0000ff", 10, 0);
-//superCircle,status,health,score
-var p1 = new Player(p1SuperCircle,1,3,0, "player1");
+var p1Circle = new Circle(20, 20 , 20, "0000ff");
+// circle, status, health, speed, direction, score, type
+var p1 = new Player(p1Circle,1,10,10,0,0, "player1");
 
-var p2Circle = new Circle(380, 380 , 70);
-var p2SuperCircle = new SuperCircle(p2Circle, "ff0000", 10, 0);
-var p2 = new Player(p2SuperCircle,1,3,0, "player2");
+var p2Circle = new Circle(380, 380 , 20, "ff0000");
+var p2 = new Player(p2Circle,1,10,10,0,0, "player2");
 
-var heartCircle = new Circle(380, 380 , 10);
-var heartSuperCircle = new SuperCircle(heartCircle, "ff69b4", 10, 0);
-var heart = new NonPlayer(heartSuperCircle, 1, "heart");
+// x, y, r ,colour
+var heartCircle = new Circle(380, 380 , 10, "ff69b4");
+// circle, status, type
+var heart = new NonPlayer(heartCircle, 1, "heart", 10 ,0);
 
-var bombCircle = new Circle(380, 380 , 10);
-var bombSuperCircle = new SuperCircle(bombCircle, "000000", 10, 0);
-var bomb = new NonPlayer(bombSuperCircle, 1, "bomb");
+var bombCircle = new Circle(380, 380 , 10, "000000");
+var bomb = new NonPlayer(bombCircle, 1, "bomb", 10, 0);
 
-var speedBoostCircle = new Circle(380, 380 , 10);
-var speedBoostSuperCircle = new SuperCircle(speedBoostCircle, "00ff00", 10, 0);
-var speedBoost = new NonPlayer(speedBoostSuperCircle, 1, "speedBoost");
+var speedBoostCircle = new Circle(380, 380 , 10, "00ff00");
+var speedBoost = new NonPlayer(speedBoostCircle, 1, "speedBoost", 10, 10);
 
 
 var npArray = [];
@@ -58,9 +55,9 @@ function setup(){
 	npArray.push(heart);
 	npArray.push(bomb);
 	npArray.push(speedBoost);
-	heartSuperCircle.randomisePos();
-	bombSuperCircle.randomisePos();
-	speedBoostSuperCircle.randomisePos();
+	for (i = 0; i < npArray.length; i++) { 
+	npArray[i].randomisePos();
+}
 	setInterval(function () {
 			gameLogic();
 	}, 10);

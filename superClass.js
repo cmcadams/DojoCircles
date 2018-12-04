@@ -1,36 +1,29 @@
-function SuperCircle(circle, colour, speed, direction){
+function Player(circle, status, health, speed, direction, score, type){
 
 this.circle = circle;
-this.colour = colour;
+this.status = status;
+this.health = health;
 this.speed = speed;
 this.direction = direction;
+this.score = score;
+this.type = type;
 
-this.draw = function(){
-	generateObject(this.circle.x, this.circle.y, this.circle.r, this.colour);
-};
-
-this.randomisePos = function(){
-
-	this.circle.x = Math.floor(Math.random()*(canvasHeight-this.circle.r-this.circle.r+1)+this.circle.r);
-	this.circle.y = Math.floor(Math.random()*(canvasHeight-this.circle.r-this.circle.r+1)+this.circle.r);
-};
-this.randomiseDirection = function(){
-
-	this.direction = Math.floor(Math.random() * 6) + 1;
+this.draw = function(){	
+	circle.draw();
 };
 
 this.move = function(){
 switch (this.direction) {
-    case LEFT:
+    case 1:
         this.moveLeft();
         break;
-    case UP:
+    case 2:
         this.moveUp();
         break;
-    case RIGHT:
+    case 3:
         this.moveRight();
         break;
-	case DOWN:
+	case 4:
         this.moveDown();
         break;
 }
@@ -53,26 +46,19 @@ this.moveDown = function(){
 };
 }
 
-function Player(superCircle, status, health, score, type){
+function NonPlayer(circle, status, type, speed, direction){
 
-this.superCircle = superCircle;
+this.circle = circle;
 this.status = status;
-this.health = health;
-this.score = score;
 this.type = type;
+this.speed = speed;
+this.direction = direction;
 
 this.draw = function(){	
-	superCircle.draw();
+	circle.draw();
 };
-}
 
-function NonPlayer(superCircle, status, type){
-
-this.superCircle = superCircle;
-this.status = status;
-this.type = type;
-
-this.draw = function(){	
-	superCircle.draw();
+this.randomisePos = function(){	
+	circle.randomisePos();
 };
 }

@@ -15,34 +15,48 @@ this.randomisePos = function(){
 };
 this.randomiseDirection = function(){
 
-	this.direction = Math.floor(Math.random() * 4) + 1;
+	this.direction = Math.floor(Math.random() * 6) + 1;
+};
+	
+this.moveLeft = function(player){
+	this.x-=player.speed;
 };
 
-this.checkCollision = function(){
-	
-	if (circleCollision (this.circle, p2.circle) && this.type == "player1"){
-	console.log("Player Collision");		
-	//p1.randomisePos();
-	//p2.randomisePos();
-	}
+this.moveRight = function(player){
+	this.x+=player.speed;
+};
 
-if (circleCollision(this.circle, heart.circle)){
-	console.log("Heart Collision");
+this.moveUp = function(player){
+	this.y-=player.speed;
+};
+
+this.moveDown = function(player){
+	this.y+=player.speed;
+};
+
+this.checkCollision = function(myCircle, player){
+	
+	if (circleCollision(this, myCircle)){
+	switch(myCircle.type) {
+    case "heart":
+       player.health+=1;
+	   console.log(player.health);
+        break;
+    case "bomb":
+        player.health-=1;
+		console.log(player.health)
+        break;
+    case "speedBoost":
+        //player.speed*=speedMultiplier;
+		console.log("hit speed boost");
+        break;
+	case "player2":
+        p1.circle.randomisePos;
+        p2.circle.randomisePos;
+        break;
+}
 	//player.health+=1;
 	//heart.randomisePos();
-	}
-
-	if (circleCollision(this.circle, bomb.circle)){
-	console.log("Bomb Collision");
-	//player.health-=1;
-	//bomb.randomisePos()
-	}
-
-	if (circleCollision(this.circle, speedBoost.circle)){
-	console.log("Speed Boost Collision");
-	//player.speed *= speedMultiplier
-	//setTimeout(speedReset, 5000);
-	//speedBoost.randomisePos()
 	}
 };
 }

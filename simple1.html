@@ -38,13 +38,14 @@ var p2 = new Player(p2Circle,1,10,10,0,0, "player2");
 // x, y, r ,colour
 var heartCircle = new Circle(380, 380 , 10, "ff69b4");
 // circle, status, type
-var heart = new NonPlayer(heartCircle, 1, "heart", 10 ,0);
+var heart = new NonPlayer(heartCircle, 1, "heart");
 
 var bombCircle = new Circle(380, 380 , 10, "000000");
-var bomb = new NonPlayer(bombCircle, 1, "bomb", 10, 0);
+var bomb = new NonPlayer(bombCircle, 1, "bomb");
 
 var speedBoostCircle = new Circle(380, 380 , 10, "00ff00");
-var speedBoost = new NonPlayer(speedBoostCircle, 1, "speedBoost", 10, 10);
+var speedBoost = new NonPlayer(speedBoostCircle, 1, "speedBoost");
+
 
 var npArray = [];
 
@@ -66,9 +67,10 @@ function gameLogic(){
 	refreshCanvas();
 	checkBoundary(p1);
 	checkBoundary(p2);
-	p1.checkCollision();
-	p2.checkCollision();
-
+	for (i = 0; i < npArray.length; i++) { 
+	p1.circle.checkCollision(npArray[i], p1);
+	p2.circle.checkCollision(npArray[i], p2);
+}
 }
 
 

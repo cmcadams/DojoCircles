@@ -55,7 +55,7 @@ function setup(){
 	npArray.push(heart);
 	npArray.push(bomb);
 	npArray.push(speedBoost);
-	for (i = 0; i < npArray.length; i++) { 
+	for (i = 0; i < npArray.length; i++) {
 	npArray[i].randomisePos();
 }
 	setInterval(function () {
@@ -68,9 +68,8 @@ function gameLogic(){
 	checkBoundary(p1);
 	checkBoundary(p2);
 	for (i = 0; i < npArray.length; i++) { 
-	p1.circle.checkCollision(npArray[i], p1);
-	p2.circle.checkCollision(npArray[i], p2);
-}
+	checkCollisions(npArray[i]);
+	}
 }
 
 

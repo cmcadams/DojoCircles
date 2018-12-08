@@ -11,22 +11,46 @@ this.type = type;
 this.draw = function(){	
 	circle.draw();
 };
-this.move = function(player){
+this.move = function(speed){
 switch (this.direction) {
     case 1:
-        this.circle.moveLeft(player);
+        this.circle.moveLeft(speed);
         break;
     case 2:
-        this.circle.moveUp(player);
+        this.circle.moveUp(speed);
         break;
     case 3:
-        this.circle.moveRight(player);
+        this.circle.moveRight(speed);
         break;
 	case 4:
-        this.circle.moveDown(player);
+        this.circle.moveDown(speed);
         break;
 }
 };
+
+this.collidedWith = function(player, myCircle){
+	
+switch(myCircle.type) {
+    case "heart":
+       player.health+=1;
+	   console.log(player.health);
+        break;
+    case "bomb":
+        player.health-=1;
+		console.log(player.health)
+        break;
+    case "speedBoost":
+        //player.speed*=speedMultiplier;
+		console.log("hit speed boost");
+        break;
+	case "player2":
+	console.log("test");
+        p1.circle.randomisePos;
+        p2.circle.randomisePos;
+        break;
+	}
+};
+
 }
 function NonPlayer(circle, status, type){
 

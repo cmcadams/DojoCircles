@@ -1,5 +1,5 @@
 function Circle(point, r, colour){
-	this.p = point;
+	this.centre = point;
 	this.r = r;
 	this.colour = colour;
 
@@ -7,7 +7,7 @@ function Circle(point, r, colour){
 
 			CTX.beginPath();
 			CTX.fillStyle = colour;
-			CTX.arc(this.p.x, this.p.y, this.r, 0, 2* Math.PI);
+			CTX.arc(this.centre.x, this.centre.y, this.r, 0, 2* Math.PI);
 			CTX.fill();
 			CTX.stroke();
 };
@@ -22,18 +22,18 @@ this.randomiseDirection = function(){
 };
 
 this.moveLeft = function(speed){
-	this.p.x-=speed;
+	this.centre.x-=speed;
 };
 
 this.moveRight = function(speed){
-	this.p.x+=speed;
+	this.centre.x+=speed;
 };
 
 this.moveUp = function(speed){
-	this.p.y-=speed;
+	this.centre.y-=speed;
 };
 
 this.moveDown = function(speed){
-	this.p.y+=speed;
+	this.centre.y+=speed;
 };
 }

@@ -49,16 +49,16 @@ this.collidedWithEdge = function(edge){
 
 	switch(edge) {
 			case TOP:
-				 this.circle.p.y = this.circle.r;
+				 this.circle.centre.y = this.circle.r;
 					break;
 			case BOTTOM:
-					this.circle.p.y = CANVASHEIGHT - this.circle.r;
+					this.circle.centre.y = CANVASHEIGHT - this.circle.r;
 					break;
 			case RIGHT:
-					this.circle.p.x = CANVASWIDTH - this.circle.r;
+					this.circle.centre.x = CANVASWIDTH - this.circle.r;
 					break;
 		case LEFT:
-					this.circle.p.x = this.circle.r;
+					this.circle.centre.x = this.circle.r;
 					break;
 		}
 	}

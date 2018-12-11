@@ -1,38 +1,16 @@
-function checkBoundary(player){
+function circleCollision(c1, c2){
 
 var ret = false;
-if(player.circle.p.x > CANVASWIDTH-player.circle.r){
-ret = RIGHT;
-}
-if(player.circle.p.x < player.circle.r){
-ret = LEFT;
-}
-if(player.circle.p.y > CANVASHEIGHT-player.circle.r){
-ret = BOTTOM;
-}
-if(player.circle.p.y < player.circle.r){
-ret = TOP;
-}
-return ret;
-}
+sideA = Math.abs(c1.circle.centre.x - c2.circle.centre.x);
+sideB = Math.abs(c1.circle.centre.y - c2.circle.centre.y);
 
- function checkCollisions(np){
+sideA = sideA*sideA;
+sideB = sideB*sideB;
 
-var edge = 0;
+distance = Math.sqrt(sideA + sideB);
 
-edge = checkBoundary(p1);
-p1.collidedWithEdge(edge);
-checkPlayerCollisions(p1);
- }
-
-function checkPlayerCollisions(player, np){
-
-  for (i = 0; i < npArray.length; i++) {
-    if(circleCollision(player, npArray[i])){
-       np = circleCollision(player, npArray[i]);
-    player.collidedWithNP(npArray[i]);
+  if(distance < c1.circle.r + c2.circle.r){
+  ret = c2;
   }
-  }
-
-
+  return ret;
 }

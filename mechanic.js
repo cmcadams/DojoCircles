@@ -7,23 +7,6 @@ function populateNPs(){
 		}
 	}
 
-  function circleCollision(c1, c2){
-
-  var ret = false;
-  sideA = Math.abs(c1.circle.p.x - c2.circle.p.x);
-  sideB = Math.abs(c1.circle.p.y - c2.circle.p.y);
-
-  sideA = sideA*sideA;
-  sideB = sideB*sideB;
-
-  distance = Math.sqrt(sideA + sideB);
-
-  	if(distance < c1.circle.r + c2.circle.r){
-  	ret = c2;
-  	}
-  	return ret;
-  }
-
   function controller(){
   if(event.keyCode == 68){
   	p1.direction = RIGHT;
@@ -41,4 +24,41 @@ function populateNPs(){
   	p1.direction = DOWN;
   	p1.move(p1.speed);
   }
+  }
+
+  function checkBoundary(player){
+
+  var ret = false;
+  if(player.circle.centre.x > CANVASWIDTH-player.circle.r){
+  ret = RIGHT;
+  }
+  if(player.circle.centre.x < player.circle.r){
+  ret = LEFT;
+  }
+  if(player.circle.centre.y > CANVASHEIGHT-player.circle.r){
+  ret = BOTTOM;
+  }
+  if(player.circle.centre.y < player.circle.r){
+  ret = TOP;
+  }
+  return ret;
+  }
+
+   function checkCollisions(np){
+
+  var edge = 0;
+
+  edge = checkBoundary(p1);
+  p1.collidedWithEdge(edge);
+  checkPlayerCollisions(p1);
+   }
+
+  function checkPlayerCollisions(player, np){
+
+    for (i = 0; i < npArray.length; i++) {
+      if(circleCollision(player, npArray[i])){
+         np = circleCollision(player, npArray[i]);
+      player.collidedWithNP(npArray[i]);
+    }
+    }
   }

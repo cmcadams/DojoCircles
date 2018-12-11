@@ -67,7 +67,7 @@ function gameLogic(){
 	refreshCanvas();
 	checkBoundary(p1);
 	checkBoundary(p2);
-	for (i = 0; i < npArray.length; i++) { 
+	for (i = 0; i < npArray.length; i++) {
 	checkCollisions(npArray[i]);
 	}
 }
@@ -77,7 +77,7 @@ function refreshCanvas(){
 	canvas.width = canvas.width;
 	p1.draw();
 	p2.draw();
-for (i = 0; i < npArray.length; i++) { 
+for (i = 0; i < npArray.length; i++) {	
 	npArray[i].draw();
 }
 }

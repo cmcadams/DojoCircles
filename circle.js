@@ -3,7 +3,7 @@ function Circle(x, y, r, colour){
 	this.y = y;
 	this.r = r;
 	this.colour = colour;
-	
+
 	this.draw = function(){
 	generateObject(this.x, this.y, this.r, this.colour);
 };

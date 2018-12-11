@@ -20,20 +20,19 @@ return ret;
 
 var edge = 0;
 
-
 edge = checkBoundary(p1);
 p1.collidedWithEdge(edge);
-
-for (i = 0; i < npArray.length; i++) {
-    	checkPlayerCollisions(p1, npArray[i]);
-}
-
+checkPlayerCollisions(p1);
  }
 
 function checkPlayerCollisions(player, np){
 
-	if(circleCollision(player, np)){
-		 np = circleCollision(player, np);
-	player.collidedWithNP(np);
-}
+  for (i = 0; i < npArray.length; i++) {
+    if(circleCollision(player, npArray[i])){
+       np = circleCollision(player, npArray[i]);
+    player.collidedWithNP(npArray[i]);
+  }
+  }
+
+
 }

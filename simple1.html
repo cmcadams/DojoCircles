@@ -22,29 +22,20 @@ Player 2 Health<p id="p2">10</p>
 <script>
 
 var canvas = document.querySelector("#canvas");
-var ctx = canvas.getContext("2d");
-var canvasHeight = 400;
-var canvasWidth = 400;
+var CTX = canvas.getContext("2d");
+var CANVASHEIGHT = 400;
+var CANVASWIDTH = 400;
 var i = 0;
 
-// x, y, r
-var p1Circle = new Circle(20, 20 , 20, "0000ff");
-// circle, status, health, speed, direction, score, type
-var p1 = new Player(p1Circle,1,10,10,0,0, "player1");
+var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, "player1");
 
-var p2Circle = new Circle(380, 380 , 20, "ff0000");
-var p2 = new Player(p2Circle,1,10,10,0,0, "player2");
+var p2 = new Player(new Circle(new Point(380, 380), 20, RED),1,10,10,0,0, "player2");
 
-// x, y, r ,colour
-var heartCircle = new Circle(380, 380 , 10, "ff69b4");
-// circle, status, type
-var heart = new NonPlayer(heartCircle, 1, "heart");
+var heart = new NonPlayer(new Circle(new Point(0, 0), 10, PINK), 1, HEART);
 
-var bombCircle = new Circle(380, 380 , 10, "000000");
-var bomb = new NonPlayer(bombCircle, 1, "bomb");
+var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB);
 
-var speedBoostCircle = new Circle(380, 380 , 10, "00ff00");
-var speedBoost = new NonPlayer(speedBoostCircle, 1, "speedBoost");
+var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST);
 
 
 var npArray = [];
@@ -52,12 +43,7 @@ var npArray = [];
 onload=setup();
 
 function setup(){
-	npArray.push(heart);
-	npArray.push(bomb);
-	npArray.push(speedBoost);
-	for (i = 0; i < npArray.length; i++) {
-	npArray[i].randomisePos();
-}
+	populateNPs();
 	setInterval(function () {
 			gameLogic();
 	}, 10);
@@ -65,9 +51,8 @@ function setup(){
 
 function gameLogic(){
 	refreshCanvas();
-	checkBoundary(p1);
-	checkBoundary(p2);
-	for (i = 0; i < npArray.length; i++) { 
+
+	for (i = 0; i < npArray.length; i++) {
 	checkCollisions(npArray[i]);
 	}
 }
@@ -77,10 +62,18 @@ function refreshCanvas(){
 	canvas.width = canvas.width;
 	p1.draw();
 	p2.draw();
-for (i = 0; i < npArray.length; i++) { 
+for (i = 0; i < npArray.length; i++) {
 	npArray[i].draw();
 }
 }
 
+function populateNPs(){
+	npArray.push(heart);
+	npArray.push(bomb);
+	npArray.push(speedBoost);
+	for (i = 0; i < npArray.length; i++) {
+	npArray[i].randomisePos();
+		}
+	}
 document.onkeydown = controller;
 </script>

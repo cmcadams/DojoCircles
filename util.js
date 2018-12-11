@@ -1,37 +1,47 @@
-function generateObject(x, y, r, colour){
-
-	ctx.beginPath(); 
-	ctx.fillStyle = "#" + colour;
-	ctx.arc(x, y, r, 0, 2* Math.PI);
-	ctx.fill();
-	ctx.stroke();
-}
-
 function checkBoundary(player){
 
-if(player.circle.x > canvasWidth-player.circle.r){
-	player.circle.x = canvasWidth - player.circle.r;
-
+var ret = false;
+if(player.circle.p.x > CANVASWIDTH-player.circle.r){
+ret = RIGHT;
 }
-if(player.circle.x < player.circle.r){
-	player.circle.x = player.circle.r;
-
+if(player.circle.p.x < player.circle.r){
+ret = LEFT;
 }
-if(player.circle.y > canvasHeight-player.circle.r){
-	player.circle.y = canvasHeight - player.circle.r;
-
+if(player.circle.p.y > CANVASHEIGHT-player.circle.r){
+ret = BOTTOM;
 }
-if(player.circle.y < player.circle.r){
-	player.circle.y = player.circle.r;
+if(player.circle.p.y < player.circle.r){
+ret = TOP;
+}
+return ret;
+}
 
-}	
+ function checkCollisions(np){
+
+var edge = 0;
+
+	checkPlayerCollisions(p1, np);
+	checkPlayerCollisions(p2, np);
+edge = checkBoundary(p1);
+p1.collidedWithEdge(edge);
+edge = checkBoundary(p2);
+p2.collidedWithEdge(edge);
+
+ }
+
+function checkPlayerCollisions(player, np){
+
+	if(circleCollision(player, np)){
+		 np = circleCollision(player, np);
+	player.collidedWithNP(np);
+}
 }
 
 function circleCollision(c1, c2){
 
 var ret = false;
-sideA = Math.abs(c1.circle.x - c2.circle.x);
-sideB = Math.abs(c1.circle.y - c2.circle.y);
+sideA = Math.abs(c1.circle.p.x - c2.circle.p.x);
+sideB = Math.abs(c1.circle.p.y - c2.circle.p.y);
 
 sideA = sideA*sideA;
 sideB = sideB*sideB;
@@ -44,23 +54,6 @@ distance = Math.sqrt(sideA + sideB);
 	return ret;
 }
 
-
- function checkCollisions(myCircle){
-	
-	checkPlayerCollisions(p1, myCircle);
-	checkPlayerCollisions(p2, myCircle);
-	
- }
- 
-function checkPlayerCollisions(player, myCircle){
-	
-	if(circleCollision(player, myCircle)){
-		 myCircle = circleCollision(player, myCircle);
-	player.collidedWith(player, myCircle);
-}
-}
-
- 
 function controller(){
 if(event.keyCode == 68){
 	p1.direction = RIGHT;

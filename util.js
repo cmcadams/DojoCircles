@@ -20,12 +20,13 @@ return ret;
 
 var edge = 0;
 
-	checkPlayerCollisions(p1, np);
-	checkPlayerCollisions(p2, np);
+
 edge = checkBoundary(p1);
 p1.collidedWithEdge(edge);
-edge = checkBoundary(p2);
-p2.collidedWithEdge(edge);
+
+for (i = 0; i < npArray.length; i++) {
+    	checkPlayerCollisions(p1, npArray[i]);  
+}
 
  }
 
@@ -70,21 +71,5 @@ if(event.keyCode == 87){
 if(event.keyCode == 83){
 	p1.direction = DOWN;
 	p1.move(p1.speed);
-}
-if(event.keyCode == 39){
-	p2.direction = RIGHT;
-	p2.move(p2.speed);
-}
-if(event.keyCode == 37){
-	p2.direction = LEFT;
-	p2.move(p2.speed);
-}
-if(event.keyCode == 38){
-	p2.direction = UP;
-	p2.move(p2.speed);
-}
-if(event.keyCode == 40){
-	p2.direction = DOWN;
-	p2.move(p2.speed);
 }
 }

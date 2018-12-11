@@ -15,3 +15,5 @@ var LEFT = 1;
 var TOP = 2;
 var RIGHT = 3;
 var BOTTOM = 4;
+var PLAYER1 = "player1";
+var PLAYER2 = "player2";

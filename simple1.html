@@ -5,6 +5,7 @@
 <script src="util.js"></script>
 <script src="superClass.js"></script>
 <script src="const.js"></script>
+<script src="mechanic.js"></script>
 <style>
 canvas{
 border:1px solid #000000;
@@ -27,9 +28,9 @@ var CANVASHEIGHT = 400;
 var CANVASWIDTH = 400;
 var i = 0;
 
-var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, "player1");
+var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, PLAYER1);
 
-var p2 = new Player(new Circle(new Point(380, 380), 20, RED),1,10,10,0,0, "player2");
+var p2 = new Player(new Circle(new Point(380, 380), 20, RED),1,10,10,0,0, PLAYER2);
 
 var heart = new NonPlayer(new Circle(new Point(0, 0), 10, PINK), 1, HEART);
 
@@ -66,14 +67,5 @@ for (i = 0; i < npArray.length; i++) {
 	npArray[i].draw();
 }
 }
-
-function populateNPs(){
-	npArray.push(heart);
-	npArray.push(bomb);
-	npArray.push(speedBoost);
-	for (i = 0; i < npArray.length; i++) {
-	npArray[i].randomisePos();
-		}
-	}
 document.onkeydown = controller;
 </script>

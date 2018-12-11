@@ -1,36 +1,39 @@
-function Circle(x, y, r, colour){
-	this.x = x;
-	this.y = y;
+function Circle(point, r, colour){
+	this.p = point;
 	this.r = r;
 	this.colour = colour;
 
 	this.draw = function(){
-	generateObject(this.x, this.y, this.r, this.colour);
+
+			CTX.beginPath();
+			CTX.fillStyle = colour;
+			CTX.arc(this.p.x, this.p.y, this.r, 0, 2* Math.PI);
+			CTX.fill();
+			CTX.stroke();
 };
 
 this.randomisePos = function(){
 
-	this.x = Math.floor(Math.random()*(canvasHeight-this.r-this.r+1)+this.r);
-	this.y = Math.floor(Math.random()*(canvasHeight-this.r-this.r+1)+this.r);
+	point.randomisePos();
 };
 this.randomiseDirection = function(){
 
-	this.direction = Math.floor(Math.random() * 6) + 1;
+	this.direction = Math.floor(Math.random() * 4) + 1;
 };
-	
+
 this.moveLeft = function(speed){
-	this.x-=speed;
+	this.p.x-=speed;
 };
 
 this.moveRight = function(speed){
-	this.x+=speed;
+	this.p.x+=speed;
 };
 
 this.moveUp = function(speed){
-	this.y-=speed;
+	this.p.y-=speed;
 };
 
 this.moveDown = function(speed){
-	this.y+=speed;
+	this.p.y+=speed;
 };
 }

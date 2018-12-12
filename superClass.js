@@ -61,14 +61,16 @@ this.collidedWithEdge = function(edge){
 					this.circle.centre.x = this.circle.r;
 					break;
 		}
-	}
-};
+	};
+}
 
-function NonPlayer(circle, status, type){
 
+function NonPlayer(circle, status, type, speed){
+	var yo = 10;
 this.circle = circle;
 this.status = status;
 this.type = type;
+this.speed = speed;
 
 this.draw = function(){
 	circle.draw();
@@ -76,6 +78,92 @@ this.draw = function(){
 
 this.randomisePos = function(){
 	circle.randomisePos();
+};
+
+this.collidedWithPlayer = function(){
+
+switch(this.type) {
+    case HEART:
+       this.randomisePos();
+	   console.log("collision with player");
+        break;
+    case BOMB:
+		this.randomisePos();
+	console.log("collision with player");
+        break;
+    case SPEEDBOOST:
+		this.randomisePos();
+	console.log("collision with player");
+        break;
+	}
+};
+this.bounce = function(edge){
+
+	switch(edge) {
+	    case TOP:
+	    this.bounceRightDown();
+	        break;
+	    case BOTTOM:
+			this.bounceLeftUp();
+	        break;
+	    case RIGHT:
+			this.bounceLeftDown();
+	        break;
+			case LEFT:
+			this.bounceRightUp();
+					break;
+				}
+};
+
+this.bounceRightDown = function(){
+	var that = this;
+
+	var moveTimer = setInterval(function(){
+			that.circle.centre.x+=that.speed;
+			that.circle.centre.y+=that.speed;
+			if(checkBoundary(that.circle)[1]){
+			clearInterval(moveTimer);
+			that.bounceLeftDown();
+		}
+	}, 10);
+};
+
+this.bounceLeftDown = function(){
+	var that = this;
+
+	var moveTimer = setInterval(function(){
+			that.circle.centre.x-=that.speed;
+			that.circle.centre.y+=that.speed;
+			if(checkBoundary(that.circle)[1]){
+			clearInterval(moveTimer);
+			that.bounceLeftUp();
+		}
+	}, 10);
+};
+
+this.bounceLeftUp = function(){
+	var that = this;
+
+	var moveTimer = setInterval(function(){
+			that.circle.centre.x-=that.speed;
+			that.circle.centre.y-=that.speed;
+			if(checkBoundary(that.circle)[1]){
+			clearInterval(moveTimer);
+			that.bounceRightUp();}
+	}, 10);
+};
+
+this.bounceRightUp = function(){
+	var that = this;
+
+	var moveTimer = setInterval(function(){
+			that.circle.centre.x+=that.speed;
+			that.circle.centre.y-=that.speed;
+			if(checkBoundary(that.circle)[1]){
+			clearInterval(moveTimer);
+			that.bounceRightDown();
+		}
+	}, 10);
 };
 }
 
@@ -85,7 +173,8 @@ this.x = x;
 this.y = y;
 
 this.randomisePos = function(){
-	this.x = Math.floor(Math.random() * CANVASWIDTH) +1;
-	this.y = Math.floor(Math.random() * CANVASHEIGHT) +1;
+	this.x = Math.floor(Math.random()*(400-10+1)+10);
+	this.y = Math.floor(Math.random()*(400-10+1)+10);
+	console.log(this.x);
 };
 }

@@ -4,7 +4,8 @@ function populateNPs(){
 	npArray.push(speedBoost);
 	for (i = 0; i < npArray.length; i++) {
 	npArray[i].randomisePos();
-		}
+	npArray[i].bounceLeftUp();
+}
 	}
 
   function controller(){
@@ -26,39 +27,48 @@ function populateNPs(){
   }
   }
 
-  function checkBoundary(player){
+  function checkBoundary(myCircle){
 
-  var ret = false;
-  if(player.circle.centre.x > CANVASWIDTH-player.circle.r){
-  ret = RIGHT;
+  var ret = [];
+  if(myCircle.centre.x > CANVASWIDTH-myCircle.r){
+  ret = [RIGHT, true];
   }
-  if(player.circle.centre.x < player.circle.r){
-  ret = LEFT;
+  if(myCircle.centre.x < myCircle.r){
+  ret = [LEFT, true];
   }
-  if(player.circle.centre.y > CANVASHEIGHT-player.circle.r){
-  ret = BOTTOM;
+  if(myCircle.centre.y > CANVASHEIGHT-myCircle.r){
+  ret = [BOTTOM, true];
   }
-  if(player.circle.centre.y < player.circle.r){
-  ret = TOP;
+  if(myCircle.centre.y < myCircle.r){
+  ret = [TOP, true];
   }
   return ret;
   }
 
-   function checkCollisions(np){
+  function checkCollisions(){
 
-  var edge = 0;
-
-  edge = checkBoundary(p1);
-  p1.collidedWithEdge(edge);
   checkPlayerCollisions(p1);
-   }
+  var edge = 0;
+  edge = checkBoundary(p1.circle)[0];
+  p1.collidedWithEdge(edge);
+	checkBounce(heart);
 
-  function checkPlayerCollisions(player, np){
+	}
 
-    for (i = 0; i < npArray.length; i++) {
+  function checkPlayerCollisions(player){
+
+    for (i = 0; i < npArray.length; i++){
       if(circleCollision(player, npArray[i])){
-         np = circleCollision(player, npArray[i]);
       player.collidedWithNP(npArray[i]);
+      npArray[i].collidedWithPlayer();
     }
     }
-  }
+}
+
+		function checkBounce(){
+		 for (i = 0; i < npArray.length; i++){
+			 var collidedWithEdge = checkBoundary(npArray[i].circle)[1];
+			 npArray[i].bounce(collidedWithEdge)
+
+		 }
+		}

@@ -25,16 +25,14 @@ var canvas = document.querySelector("#canvas");
 var CTX = canvas.getContext("2d");
 var CANVASHEIGHT = 400;
 var CANVASWIDTH = 400;
-var i = 0;
 
 var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, PLAYER1);
 
-var heart = new NonPlayer(new Circle(new Point(0, 0), 10, PINK), 1, HEART);
+var heart = new NonPlayer(new Circle(new Point(0, 0), 10, PINK), 1, HEART, 1);
 
-var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB);
+var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB, 1);
 
-var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST);
-
+var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST, 1);
 
 var npArray = [];
 
@@ -51,7 +49,6 @@ function gameLogic(){
 	refreshCanvas();
 	checkCollisions();
 }
-
 
 function refreshCanvas(){
 	canvas.width = canvas.width;

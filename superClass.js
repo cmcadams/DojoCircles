@@ -32,13 +32,16 @@ this.collidedWithNP = function(np){
 
 switch(np.type) {
     case HEART:
+		popSnd.play();
        this.health+=1;
 	   console.log(this.health);
         break;
+				popSnd.play();
     case BOMB:
         this.health-=1;
 		console.log(this.health)
         break;
+				popSnd.play();
     case SPEEDBOOST:
         //this.speed*=speedMultiplier;
 		console.log("hit speed boost");
@@ -66,7 +69,7 @@ this.collidedWithEdge = function(edge){
 
 
 function NonPlayer(circle, status, type, speed){
-	var yo = 10;
+
 this.circle = circle;
 this.status = status;
 this.type = type;
@@ -101,15 +104,19 @@ this.bounce = function(edge){
 
 	switch(edge) {
 	    case TOP:
+			bounceSnd.play();
 	    this.bounceRightDown();
 	        break;
 	    case BOTTOM:
+			bounceSnd.play();
 			this.bounceLeftUp();
 	        break;
 	    case RIGHT:
+			bounceSnd.play();
 			this.bounceLeftDown();
 	        break;
 			case LEFT:
+			bounceSnd.play();
 			this.bounceRightUp();
 					break;
 				}
@@ -123,7 +130,6 @@ this.bounceRightDown = function(){
 			that.circle.centre.y+=that.speed;
 			if(checkBoundary(that.circle)[1]){
 			clearInterval(moveTimer);
-			that.bounceLeftDown();
 		}
 	}, 10);
 };
@@ -136,7 +142,6 @@ this.bounceLeftDown = function(){
 			that.circle.centre.y+=that.speed;
 			if(checkBoundary(that.circle)[1]){
 			clearInterval(moveTimer);
-			that.bounceLeftUp();
 		}
 	}, 10);
 };
@@ -149,7 +154,7 @@ this.bounceLeftUp = function(){
 			that.circle.centre.y-=that.speed;
 			if(checkBoundary(that.circle)[1]){
 			clearInterval(moveTimer);
-			that.bounceRightUp();}
+		}
 	}, 10);
 };
 
@@ -161,7 +166,6 @@ this.bounceRightUp = function(){
 			that.circle.centre.y-=that.speed;
 			if(checkBoundary(that.circle)[1]){
 			clearInterval(moveTimer);
-			that.bounceRightDown();
 		}
 	}, 10);
 };

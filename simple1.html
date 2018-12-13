@@ -30,19 +30,21 @@ var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, PLAYER
 
 var heart = new NonPlayer(new Circle(new Point(0, 0), 10, PINK), 1, HEART, 1);
 
-var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB, 1);
+//var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB, 1);
 
-var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST, 1);
+//var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST, 0.5);
 
 var npArray = [];
 
 onload=setup();
 
 function setup(){
+	bounceSnd = new sound("bounce.mp3");
+	popSnd = new sound("pop.mp3");
 	populateNPs();
 	setInterval(function () {
 			gameLogic();
-	}, 10);
+	}, 5);
 }
 
 function gameLogic(){

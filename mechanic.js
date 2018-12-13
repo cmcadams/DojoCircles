@@ -1,7 +1,7 @@
 function populateNPs(){
 	npArray.push(heart);
-	npArray.push(bomb);
-	npArray.push(speedBoost);
+//	npArray.push(bomb);
+//	npArray.push(speedBoost);
 	for (i = 0; i < npArray.length; i++) {
 	npArray[i].randomisePos();
 	npArray[i].bounceLeftUp();
@@ -67,8 +67,22 @@ function populateNPs(){
 
 		function checkBounce(){
 		 for (i = 0; i < npArray.length; i++){
-			 var collidedWithEdge = checkBoundary(npArray[i].circle)[1];
-			 npArray[i].bounce(collidedWithEdge)
+			 var collidedWithEdge = checkBoundary(npArray[i].circle)[0];
+			 npArray[i].bounce(collidedWithEdge);
 
 		 }
 		}
+		function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}

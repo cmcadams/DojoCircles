@@ -1,29 +1,29 @@
 function populateNPs(){
 	npArray.push(heart);
-//	npArray.push(bomb);
-//	npArray.push(speedBoost);
+	npArray.push(bomb);
+	npArray.push(speedBoost);
 	for (i = 0; i < npArray.length; i++) {
 	npArray[i].randomisePos();
-	npArray[i].bounceLeftUp();
+	npArray[i].randomiseDirection();
 }
 	}
 
   function controller(){
   if(event.keyCode == 68){
   	p1.direction = RIGHT;
-  	p1.move(p1.speed);
+  	p1.move();
   	}
   if(event.keyCode == 65){
   	p1.direction = LEFT;
-  	p1.move(p1.speed);
+  	p1.move();
   }
   if(event.keyCode == 87){
   	p1.direction = UP;
-  	p1.move(p1.speed);
+  	p1.move();
   }
   if(event.keyCode == 83){
   	p1.direction = DOWN;
-  	p1.move(p1.speed);
+  	p1.move();
   }
   }
 
@@ -45,16 +45,22 @@ function populateNPs(){
   return ret;
   }
 
-  function checkCollisions(){
+  function checkPlayerCollisions(circle){
 
-  checkPlayerCollisions(p1);
+  checkPlayerCollisions(circle);
   var edge = 0;
-  edge = checkBoundary(p1.circle)[0];
-  p1.collidedWithEdge(edge);
-	checkBounce(heart);
+  edge = checkBoundary(circle.circle)[0];
+  circle.collidedWithEdge(edge);
 
 	}
 
+	function checkNonPlayerCollisions(circle){
+
+	var edge = 0;
+	edge = checkBoundary(circle.circle)[0];
+	circle.collidedWithEdge(edge);
+
+		}
   function checkPlayerCollisions(player){
 
     for (i = 0; i < npArray.length; i++){
@@ -64,14 +70,6 @@ function populateNPs(){
     }
     }
 }
-
-		function checkBounce(){
-		 for (i = 0; i < npArray.length; i++){
-			 var collidedWithEdge = checkBoundary(npArray[i].circle)[0];
-			 npArray[i].bounce(collidedWithEdge);
-
-		 }
-		}
 		function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;

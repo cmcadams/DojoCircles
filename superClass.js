@@ -11,19 +11,19 @@ this.type = type;
 this.draw = function(){
 	circle.draw();
 };
-this.move = function(speed){
+this.move = function(){
 switch (this.direction) {
-    case 1:
-        this.circle.moveLeft(speed);
+    case LEFT:
+        this.circle.moveLeft(this.speed);
         break;
     case 2:
-        this.circle.moveUp(speed);
+        this.circle.moveUp(this.speed);
         break;
     case 3:
-        this.circle.moveRight(speed);
+        this.circle.moveRight(this.speed);
         break;
 	case 4:
-        this.circle.moveDown(speed);
+        this.circle.moveDown(this.speed);
         break;
 }
 };
@@ -68,19 +68,58 @@ this.collidedWithEdge = function(edge){
 }
 
 
-function NonPlayer(circle, status, type, speed){
+function NonPlayer(circle, status, type, speed, direction){
 
 this.circle = circle;
 this.status = status;
 this.type = type;
 this.speed = speed;
+this.direction = direction;
 
 this.draw = function(){
 	circle.draw();
 };
 
+this.move = function(){
+switch (this.direction) {
+    case 1:
+        this.circle.moveLeft(this.speed);
+        break;
+    case 2:
+        this.circle.moveUp(this.speed);
+        break;
+    case 3:
+        this.circle.moveRight(this.speed);
+        break;
+	case 4:
+        this.circle.moveDown(this.speed);
+        break;
+}
+};
+this.collidedWithEdge = function(edge){
+
+	switch(edge) {
+			case TOP:
+				 this.direction = DOWN;
+					break;
+			case BOTTOM:
+				 this.direction = UP;
+					break;
+			case RIGHT:
+					this.direction = LEFT;
+					break;
+		case LEFT:
+					this.direction = RIGHT;
+					break;
+		}
+	};
+
 this.randomisePos = function(){
 	circle.randomisePos();
+};
+
+this.randomiseDirection = function(){
+	circle.randomiseDirection();
 };
 
 this.collidedWithPlayer = function(){
@@ -98,77 +137,8 @@ switch(this.type) {
 		this.randomisePos();
 	console.log("collision with player");
         break;
-	}
-};
-this.bounce = function(edge){
-
-	switch(edge) {
-	    case TOP:
-			bounceSnd.play();
-	    this.bounceRightDown();
-	        break;
-	    case BOTTOM:
-			bounceSnd.play();
-			this.bounceLeftUp();
-	        break;
-	    case RIGHT:
-			bounceSnd.play();
-			this.bounceLeftDown();
-	        break;
-			case LEFT:
-			bounceSnd.play();
-			this.bounceRightUp();
-					break;
-				}
-};
-
-this.bounceRightDown = function(){
-	var that = this;
-
-	var moveTimer = setInterval(function(){
-			that.circle.centre.x+=that.speed;
-			that.circle.centre.y+=that.speed;
-			if(checkBoundary(that.circle)[1]){
-			clearInterval(moveTimer);
-		}
-	}, 10);
-};
-
-this.bounceLeftDown = function(){
-	var that = this;
-
-	var moveTimer = setInterval(function(){
-			that.circle.centre.x-=that.speed;
-			that.circle.centre.y+=that.speed;
-			if(checkBoundary(that.circle)[1]){
-			clearInterval(moveTimer);
-		}
-	}, 10);
-};
-
-this.bounceLeftUp = function(){
-	var that = this;
-
-	var moveTimer = setInterval(function(){
-			that.circle.centre.x-=that.speed;
-			that.circle.centre.y-=that.speed;
-			if(checkBoundary(that.circle)[1]){
-			clearInterval(moveTimer);
-		}
-	}, 10);
-};
-
-this.bounceRightUp = function(){
-	var that = this;
-
-	var moveTimer = setInterval(function(){
-			that.circle.centre.x+=that.speed;
-			that.circle.centre.y-=that.speed;
-			if(checkBoundary(that.circle)[1]){
-			clearInterval(moveTimer);
-		}
-	}, 10);
-};
+			}
+	};
 }
 
 function Point(x, y){

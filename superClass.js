@@ -32,36 +32,35 @@ this.collidedWithNP = function(np){
 
 switch(np.type) {
     case HEART:
-		popSnd.play();
        this.health+=1;
 	   console.log(this.health);
         break;
-				popSnd.play();
     case BOMB:
         this.health-=1;
 		console.log(this.health)
         break;
-				popSnd.play();
     case SPEEDBOOST:
         //this.speed*=speedMultiplier;
 		console.log("hit speed boost");
         break;
+
 	}
+	popSnd.play();
 };
 this.collidedWithEdge = function(edge){
 
 	switch(edge) {
-			case TOP:
-				 this.circle.centre.y = this.circle.r;
+			case TOPEDGE:
+				 this.circle.point.y = this.circle.r;
 					break;
-			case BOTTOM:
-					this.circle.centre.y = CANVASHEIGHT - this.circle.r;
+			case BOTTOMEDGE:
+					this.circle.point.y = CANVASHEIGHT - this.circle.r;
 					break;
-			case RIGHT:
-					this.circle.centre.x = CANVASWIDTH - this.circle.r;
+			case RIGHTEDGE:
+					this.circle.point.x = CANVASWIDTH - this.circle.r;
 					break;
-		case LEFT:
-					this.circle.centre.x = this.circle.r;
+		case LEFTEDGE:
+					this.circle.point.x = this.circle.r;
 					break;
 		}
 	};
@@ -91,51 +90,67 @@ switch (this.direction) {
     case 3:
         this.circle.moveRight(this.speed);
         break;
-	case 4:
+		case 4:
         this.circle.moveDown(this.speed);
         break;
+		case 5:
+		     this.circle.moveLeft(this.speed/2);
+				 this.circle.moveUp(this.speed/2);
+		     break;
+		case 6:
+		     this.circle.moveLeft(this.speed/2);
+				 this.circle.moveDown(this.speed/2);
+		     break;
+		case 7:
+		     this.circle.moveRight(this.speed/2);
+				 this.circle.moveUp(this.speed/2);
+		     break;
+		case 8:
+		     this.circle.moveDown(this.speed/2);
+				 this.circle.moveRight(this.speed/2);
+		     break;
 }
 };
 this.collidedWithEdge = function(edge){
 
 	switch(edge) {
-			case TOP:
+			case TOPEDGE:
 				 this.direction = DOWN;
+				 bounceSnd.play();
 					break;
-			case BOTTOM:
+			case BOTTOMEDGE:
 				 this.direction = UP;
+				 bounceSnd.play();
 					break;
-			case RIGHT:
+			case RIGHTEDGE:
 					this.direction = LEFT;
+					bounceSnd.play();
 					break;
-		case LEFT:
+		case LEFTEDGE:
 					this.direction = RIGHT;
+					bounceSnd.play();
 					break;
 		}
 	};
 
-this.randomisePos = function(){
-	circle.randomisePos();
-};
-
 this.randomiseDirection = function(){
-	circle.randomiseDirection();
+	this.direction = Math.floor(Math.random() * directions.length) + 1;
 };
 
 this.collidedWithPlayer = function(){
 
 switch(this.type) {
     case HEART:
-       this.randomisePos();
-	   console.log("collision with player");
+     	randomisePos(this);
+	   	console.log("collision with player");
         break;
     case BOMB:
-		this.randomisePos();
-	console.log("collision with player");
+			randomisePos(this);
+			console.log("collision with player");
         break;
     case SPEEDBOOST:
-		this.randomisePos();
-	console.log("collision with player");
+			randomisePos(this);
+			console.log("collision with player");
         break;
 			}
 	};
@@ -145,10 +160,4 @@ function Point(x, y){
 
 this.x = x;
 this.y = y;
-
-this.randomisePos = function(){
-	this.x = Math.floor(Math.random()*(400-10+1)+10);
-	this.y = Math.floor(Math.random()*(400-10+1)+10);
-	console.log(this.x);
-};
 }

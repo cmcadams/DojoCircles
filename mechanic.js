@@ -1,11 +1,19 @@
 function populateNPs(){
 	npArray.push(heart);
-	npArray.push(bomb);
-	npArray.push(speedBoost);
+	//npArray.push(bomb);
+	//npArray.push(speedBoost);
 	for (i = 0; i < npArray.length; i++) {
-	npArray[i].randomisePos();
+	randomisePos(npArray[i]);
 	npArray[i].randomiseDirection();
+	console.log(npArray[i].direction);
 }
+	}
+
+	function randomisePos(circle){
+
+		circle.circle.point.x = Math.floor(Math.random()*(400-10+1)+10);
+		circle.circle.point.y = Math.floor(Math.random()*(400-10+1)+10);
+
 	}
 
   function controller(){
@@ -30,24 +38,24 @@ function populateNPs(){
   function checkBoundary(myCircle){
 
   var ret = [];
-  if(myCircle.centre.x > CANVASWIDTH-myCircle.r){
-  ret = [RIGHT, true];
+  if(myCircle.point.x > CANVASWIDTH-myCircle.r){
+  ret = [RIGHTEDGE, true];
   }
-  if(myCircle.centre.x < myCircle.r){
-  ret = [LEFT, true];
+  if(myCircle.point.x < myCircle.r){
+  ret = [LEFTEDGE, true];
   }
-  if(myCircle.centre.y > CANVASHEIGHT-myCircle.r){
-  ret = [BOTTOM, true];
+  if(myCircle.point.y > CANVASHEIGHT-myCircle.r){
+  ret = [BOTTOMEDGE, true];
   }
-  if(myCircle.centre.y < myCircle.r){
-  ret = [TOP, true];
+  if(myCircle.point.y < myCircle.r){
+  ret = [TOPEDGE, true];
   }
   return ret;
   }
 
   function checkPlayerCollisions(circle){
 
-  checkPlayerCollisions(circle);
+  checkCircleCollisions(circle);
   var edge = 0;
   edge = checkBoundary(circle.circle)[0];
   circle.collidedWithEdge(edge);
@@ -61,7 +69,7 @@ function populateNPs(){
 	circle.collidedWithEdge(edge);
 
 		}
-  function checkPlayerCollisions(player){
+  function checkCircleCollisions(player){
 
     for (i = 0; i < npArray.length; i++){
       if(circleCollision(player, npArray[i])){
@@ -70,7 +78,7 @@ function populateNPs(){
     }
     }
 }
-		function sound(src) {
+	function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
   this.sound.setAttribute("preload", "auto");

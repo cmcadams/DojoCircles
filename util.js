@@ -11,8 +11,8 @@ distance = checkDistance(c1, c2);
 
 function checkDistance(c1, c2){
 
-  sideA = Math.abs(c1.circle.centre.x - c2.circle.centre.x);
-  sideB = Math.abs(c1.circle.centre.y - c2.circle.centre.y);
+  sideA = Math.abs(c1.circle.point.x - c2.circle.point.x);
+  sideB = Math.abs(c1.circle.point.y - c2.circle.point.y);
 
   sideA = sideA*sideA;
   sideB = sideB*sideB;

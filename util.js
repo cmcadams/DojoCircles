@@ -20,3 +20,21 @@ function checkDistance(c1, c2){
   return Math.sqrt(sideA + sideB);
 
 }
+
+function BounceMap(edge, initialD, newD){
+
+this.edge = edge;
+this.initD = initialD;
+this.newD = newD;
+
+this.getNewD = function(){
+  for (i = 0; i < bounceMaps.length; i++ ){
+
+if(edge == bounceMaps[i][0] && initD == bounceMaps[i][1]){
+
+ newD = bounceMaps[i][2];
+  }
+  return newD;
+}
+};
+}

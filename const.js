@@ -19,5 +19,6 @@ var LEFTEDGE = 1;
 var TOPEDGE = 2;
 var RIGHTEDGE = 3;
 var BOTTOMEDGE = 4;
+var NOEDGE = 0;
 var PLAYER1 = "player1";
 var PLAYER2 = "player2";

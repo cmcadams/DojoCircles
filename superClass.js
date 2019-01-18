@@ -81,31 +81,31 @@ this.draw = function(){
 
 this.move = function(){
 switch (this.direction) {
-    case 1:
+    case LEFT:
         this.circle.moveLeft(this.speed);
         break;
-    case 2:
+    case UP:
         this.circle.moveUp(this.speed);
         break;
-    case 3:
+    case RIGHT:
         this.circle.moveRight(this.speed);
         break;
-		case 4:
+		case DOWN:
         this.circle.moveDown(this.speed);
         break;
-		case 5:
+		case LEFTUP:
 		     this.circle.moveLeft(this.speed/2);
 				 this.circle.moveUp(this.speed/2);
 		     break;
-		case 6:
+		case LEFTDOWN:
 		     this.circle.moveLeft(this.speed/2);
 				 this.circle.moveDown(this.speed/2);
 		     break;
-		case 7:
+		case RIGHTUP:
 		     this.circle.moveRight(this.speed/2);
 				 this.circle.moveUp(this.speed/2);
 		     break;
-		case 8:
+		case RIGHTDOWN:
 		     this.circle.moveDown(this.speed/2);
 				 this.circle.moveRight(this.speed/2);
 		     break;
@@ -113,28 +113,13 @@ switch (this.direction) {
 };
 this.collidedWithEdge = function(edge){
 
-	switch(edge) {
-			case TOPEDGE:
-				 this.direction = DOWN;
-				 bounceSnd.play();
-					break;
-			case BOTTOMEDGE:
-				 this.direction = UP;
-				 bounceSnd.play();
-					break;
-			case RIGHTEDGE:
-					this.direction = LEFT;
-					bounceSnd.play();
-					break;
-		case LEFTEDGE:
-					this.direction = RIGHT;
-					bounceSnd.play();
-					break;
-		}
+console.log(edge +", "+ this.direction);
+	this.direction = bm1.getNewD(edge, this.direction);
+console.log(this.direction);
 	};
 
 this.randomiseDirection = function(){
-	this.direction = Math.floor(Math.random() * directions.length) + 1;
+	this.direction = UP;//Math.floor(Math.random() * directions.length) + 1;
 };
 
 this.collidedWithPlayer = function(){

@@ -16,6 +16,15 @@ function populateNPs(){
 
 	}
 
+function initialise(){
+
+bm1 = new BounceMap(TOPEDGE, UP, DOWN);
+bm2 = new BounceMap(TOPEDGE, LEFTUP, RIGHTDOWN);
+bm3 = new BounceMap(TOPEDGE, RIGHTUP, LEFTDOWN);
+
+bounceMaps = [bm1, bm2, bm3];
+}
+
   function controller(){
   if(event.keyCode == 68){
   	p1.direction = RIGHT;
@@ -37,18 +46,18 @@ function populateNPs(){
 
   function checkBoundary(myCircle){
 
-  var ret = [];
+  var ret = NOEDGE;
   if(myCircle.point.x > CANVASWIDTH-myCircle.r){
-  ret = [RIGHTEDGE, true];
+  ret = RIGHTEDGE;
   }
   if(myCircle.point.x < myCircle.r){
-  ret = [LEFTEDGE, true];
+  ret = LEFTEDGE;
   }
   if(myCircle.point.y > CANVASHEIGHT-myCircle.r){
-  ret = [BOTTOMEDGE, true];
+  ret = BOTTOMEDGE;
   }
   if(myCircle.point.y < myCircle.r){
-  ret = [TOPEDGE, true];
+  ret = TOPEDGE;
   }
   return ret;
   }
@@ -57,9 +66,14 @@ function populateNPs(){
 
   checkCircleCollisions(circle);
   var edge = 0;
-  edge = checkBoundary(circle.circle)[0];
-  circle.collidedWithEdge(edge);
+  edge = checkBoundary(circle.circle);
+	if(edge == "NOEDGE"){
 
+
+	}
+	else{
+  circle.collidedWithEdge(edge);
+}
 	}
 
 	function checkNonPlayerCollisions(circle){

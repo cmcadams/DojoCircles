@@ -30,12 +30,12 @@ var p1 = new Player( new Circle(new Point(20, 20), 20, BLUE),1,10,10,0,0, PLAYER
 
 var heart = new NonPlayer(new Circle(new Point(200, 200), 10, PINK), 1, HEART, 1, UP);
 
-var bounceMapsArray = [];
 var bomb = new NonPlayer(new Circle(new Point(0, 0), 10, BLACK), 1, BOMB, 1, DOWN);
 
 var speedBoost = new NonPlayer(new Circle(new Point(0, 0), 10, GREEN), 1, SPEEDBOOST, 1, LEFT);
 
 var npArray = [];
+var bounceMapsArray = [];
 
 var directions = [LEFT, UP, RIGHT, DOWN, LEFTUP, LEFTDOWN, RIGHTUP, RIGHTDOWN];
 
@@ -44,6 +44,8 @@ onload=setup();
 function setup(){
 	bounceSnd = new sound("bounce.mp3");
 	popSnd = new sound("pop.mp3");
+	healthSnd = new sound("health.wav");
+	explodeSnd = new sound("explode.wav");
 	populateNPs();
 	initialiseBM();
 	setInterval(function () {

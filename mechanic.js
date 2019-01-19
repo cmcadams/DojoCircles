@@ -1,41 +1,33 @@
 function populateNPs(){
 	npArray.push(heart);
 	npArray.push(bomb);
-	npArray.push(speedBoost);
+	//npArray.push(speedBoost);
 	for (i = 0; i < npArray.length; i++) {
 	randomisePos(npArray[i]);
 	npArray[i].randomiseDirection();
-	console.log(npArray[i].direction);
 }
-	}
-
-	function randomisePos(circle){
-
-		circle.circle.point.x = Math.floor(Math.random()*(400-10+1)+10);
-		circle.circle.point.y = Math.floor(Math.random()*(400-10+1)+10);
-
 	}
 
 function initialiseBM(){
 
-bm1 = new BounceMaps(TOPEDGE, UP, DOWN);
-bm2 = new BounceMaps(TOPEDGE, LEFTUP, LEFTDOWN);
-bm3 = new BounceMaps(TOPEDGE, RIGHTUP, RIGHTDOWN);
-bm4 = new BounceMaps(BOTTOMEDGE, DOWN, UP);
-bm5 = new BounceMaps(BOTTOMEDGE, LEFTDOWN, LEFTUP);
-bm6 = new BounceMaps(BOTTOMEDGE, RIGHTDOWN, RIGHTUP);
-bm7 = new BounceMaps(LEFTEDGE, LEFT, RIGHT);
-bm8 = new BounceMaps(LEFTEDGE, LEFTUP, RIGHTUP);
-bm9 = new BounceMaps(LEFTEDGE, LEFTDOWN, RIGHTDOWN);
-bm10 = new BounceMaps(RIGHTEDGE, RIGHT, LEFT);
-bm11 = new BounceMaps(RIGHTEDGE, RIGHTDOWN, LEFTDOWN);
-bm12 = new BounceMaps(RIGHTEDGE, RIGHTUP, LEFTUP);
+bm1 = new BounceMap(TOPEDGE, UP, DOWN);
+bm2 = new BounceMap(TOPEDGE, LEFTUP, LEFTDOWN);
+bm3 = new BounceMap(TOPEDGE, RIGHTUP, RIGHTDOWN);
+bm4 = new BounceMap(BOTTOMEDGE, DOWN, UP);
+bm5 = new BounceMap(BOTTOMEDGE, LEFTDOWN, LEFTUP);
+bm6 = new BounceMap(BOTTOMEDGE, RIGHTDOWN, RIGHTUP);
+bm7 = new BounceMap(LEFTEDGE, LEFT, RIGHT);
+bm8 = new BounceMap(LEFTEDGE, LEFTUP, RIGHTUP);
+bm9 = new BounceMap(LEFTEDGE, LEFTDOWN, RIGHTDOWN);
+bm10 = new BounceMap(RIGHTEDGE, RIGHT, LEFT);
+bm11 = new BounceMap(RIGHTEDGE, RIGHTDOWN, LEFTDOWN);
+bm12 = new BounceMap(RIGHTEDGE, RIGHTUP, LEFTUP);
 
 bounceMapsArray = [bm1, bm2, bm3, bm4, bm5, bm6, bm7, bm8, bm9, bm10, bm11, bm12];
-bounceMap = new BounceMap();
+bounceMaps = new BounceMaps(bounceMapsArray);
 }
 
-function BounceMaps(edge, initD, newD){
+function BounceMap(edge, initD, newD){
 
 this.edge = edge;
 this.initD = initD;

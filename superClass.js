@@ -16,13 +16,13 @@ switch (this.direction) {
     case LEFT:
         this.circle.moveLeft(this.speed);
         break;
-    case 2:
+    case UP:
         this.circle.moveUp(this.speed);
         break;
-    case 3:
+    case RIGHT:
         this.circle.moveRight(this.speed);
         break;
-	case 4:
+	case  DOWN:
         this.circle.moveDown(this.speed);
         break;
 }
@@ -33,10 +33,12 @@ this.collidedWithNP = function(np){
 switch(np.type) {
     case HEART:
        this.health+=1;
+			 healthSnd.play();
 	   console.log(this.health);
         break;
     case BOMB:
         this.health-=1;
+				explodeSnd.play();
 		console.log(this.health)
         break;
     case SPEEDBOOST:
@@ -45,7 +47,7 @@ switch(np.type) {
         break;
 
 	}
-	popSnd.play();
+	//popSnd.play();
 };
 this.collidedWithEdge = function(edge){
 
@@ -114,7 +116,8 @@ switch (this.direction) {
 };
 this.collidedWithEdge = function(edge){
 
-	this.direction = bounceMap.getNewD(edge, this.direction);
+	bounceSnd.play();
+	this.direction = bounceMaps.getNewD(edge, this.direction);
 	};
 
 this.randomiseDirection = function(){
